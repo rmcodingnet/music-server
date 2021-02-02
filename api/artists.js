@@ -187,7 +187,7 @@ router.delete("/music/artists/:ID", [param("ID").isInt().toInt()], (req, res) =>
         if (value > 0) {
           return res.send("ARTIST DELETED");
         }
-        return res.status(404).send("PRODUCT NOT FOUND");
+        return res.status(404).send("ARTIST NOT FOUND");
       })
       .catch((error) => {
         return res.status(500).send(error);
