@@ -16,15 +16,6 @@ exports.up = function(knex) {
             .references("artists.id")
             .onDelete("SET NULL")
     })
-    .table("albums", table => {
-        table.string("title", 100)
-    })
-    .table("artists", table => {
-        table.string("firstname", 100)
-        table.string("surname", 100)
-        //Was going to use these to fields to 
-        //concat together a "name" field if that's possible
-    })
 };
 
 exports.down = function(knex) {
@@ -44,14 +35,5 @@ exports.down = function(knex) {
         });
 
         table.dropColumns([...foreignKeys, ...otherFields]);
-    })
-    .table("albums", table => {
-        table.dropColumn("title");
-    })
-    .table("artists", table => {
-        table.dropColumns([
-            "firstname",
-            "surname"
-        ])
     })
 };
