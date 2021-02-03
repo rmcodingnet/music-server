@@ -1,0 +1,21 @@
+[
+    {
+        "firstname": "Eric",
+        "surname": "Clapton",
+        "age": 75,
+        "gender":"Male"
+    },
+    {
+        "firstname": "Alissa",
+        "surname": "White-Gluz",
+        "age": 35,
+        "gender":"Female"
+    },
+    {
+        "firstname": "Matt",
+        "surname": "Heafy",
+        "age": 35,
+        "gender":"Male"
+    }
+
+]
