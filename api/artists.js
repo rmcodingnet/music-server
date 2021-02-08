@@ -27,20 +27,20 @@ router.get(
                 "artists.firstname",
                 "artists.surname",
                 "artists.age",
-                "artists.gender",
-                "songs.title",
-                "albums.title"
+                "artists.gender"//,
+                // "songs.title",
+                // "albums.title"
             )
-            .leftJoin(
-                "songs",
-                "songs.id",
-                "artists.songId"
-            )
-            .leftJoin(
-                "albums",
-                "albums.id",
-                "artists.albumId"
-            )
+            // .leftJoin(
+            //     "songs",
+            //     "songs.id",
+            //     "artists.songId"
+            // )
+            // .leftJoin(
+            //     "albums",
+            //     "albums.id",
+            //     "artists.albumId"
+            // )
             .orderBy("artists.createdAt", "desc")
             .then(result => { return res.json(result) })
     }
@@ -58,20 +58,20 @@ router.get(
                     "artists.firstname",
                     "artists.surname",
                     "artists.age",
-                    "artists.gender",
-                    "songs.title",
-                    "albums.title"
+                    "artists.gender"//,
+                    // "songs.title",
+                    // "albums.title"
                 )
-                .leftJoin(
-                    "songs",
-                    "songs.id",
-                    "artists.songId"
-                )
-                .leftJoin(
-                    "albums",
-                    "albums.id",
-                    "artists.albumId"
-                )
+                // .leftJoin(
+                //     "songs",
+                //     "songs.id",
+                //     "artists.songId"
+                // )
+                // .leftJoin(
+                //     "albums",
+                //     "albums.id",
+                //     "artists.albumId"
+                // )
                 .where("artists.id", artistID)
                 .first()
                 .then((result) => {
@@ -94,9 +94,9 @@ router.post(
         body("firstname"),
         body("surname"),
         body("age"),
-        body("gender"),
-        body("songId"),
-        body("albumId")
+        body("gender")
+        // body("songId"),
+        // body("albumId")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -112,12 +112,12 @@ router.post(
                 surname: data.surname,
                 age: data.age,
                 gender: data.gender,
-                songId: data.songId,
-                albumId: data.albumId,
+                // songId: data.songId,
+                // albumId: data.albumId,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })
-            .then(([newId]) => {
+            .then(([newID]) => {
                 return res.json({ newID });
             })
             .catch((err) => {
@@ -134,8 +134,8 @@ router.post(
         body("surname"),
         body("age"),
         body("gender"),
-        body("songId"),
-        body("albumId")
+        // body("songId"),
+        // body("albumId")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -151,9 +151,9 @@ router.post(
              surname: data.surname,
              age: data.age,
              gender: data.gender, 
-             songId: data.songId,
-             albumId: data.albumId,
-             updatedAt: new Date(),
+            //  songId: data.songId,
+            //  albumId: data.albumId,
+             updatedAt: new Date()
          })
          .where("id", data.ID)
          .then((result) => {
