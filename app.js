@@ -21,14 +21,17 @@ const app = express();
 app.use(cors(corsOptions));
 
 const artists = require("./api/artists");
+const albums = require("./api/albums");
+const songs = require("./api/songs");
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser());
 
-app.use("/api/artists", artists)
-
+app.use("/api/artists", artists);
+app.use("/api/albums", albums);
+app.use("/api/songs", songs)
 
 app.use(function (req, res, next) {
     next(createError(404));
