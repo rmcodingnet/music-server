@@ -13,7 +13,7 @@ const knex = require("../db/knex")
 const router = express.Router();
 
 router.get(
-    "/music/artists/",
+    "/",
     [],
     async (req, res) => {
         const errors = validationResult(req);
@@ -47,7 +47,7 @@ router.get(
 )
 
 router.get(
-    "/music/artists/:artistID",
+    "/:artistID",
     [param("artistID").isInt().toInt()],
     async (req, res) => {
         try {
@@ -89,7 +89,7 @@ router.get(
 )
 
 router.post(
-    "/music/artists/",
+    "/",
     [
         body("firstname"),
         body("surname"),
@@ -127,7 +127,7 @@ router.post(
 );
 
 router.post(
-    "/music/artists/:ID",
+    "/:ID",
     [
         param("ID"),
         body("firstname"),
@@ -170,7 +170,7 @@ router.post(
     
 )
 
-router.delete("/music/artists/:ID", [param("ID").isInt().toInt()], (req, res) => {
+router.delete("/:ID", [param("ID").isInt().toInt()], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
