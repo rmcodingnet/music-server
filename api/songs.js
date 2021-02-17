@@ -25,12 +25,16 @@ router.get(
             .select(
                 "songs.id",
                 "songs.title",
-                "songs.length",
-                "songs.rating",
-                "albums.title as albumTitle",
+                "artists.id as artistId",
                 "artists.firstname",
                 "artists.surname",
-                "collaborators.name"
+                "artists.age",
+                "collaborators.name as collaborators",
+                "albums.id as albumId",
+                "albums.title as albumTitle",
+                "albums.releaseDate",
+                "songs.length",      
+                knex.raw("GROUP_CONCAT(collaborators.name) as?", ["collaborators"])          
             )
             .leftJoin(
                 "albums",
@@ -48,6 +52,8 @@ router.get(
                 "collaborators.songId"
             )
             .orderBy("songs.createdAt", "desc")
+            
+            .groupBy("songs.id")
             .then(result => { return res.json(result) })
     }
 )
@@ -67,7 +73,9 @@ router.get(
                     "albums.title as albumTitle",
                     "artists.firstname",
                     "artists.surname",
-                    "collaborators.name"
+                    "collaborators.name",
+                    knex.raw("GROUP_CONCAT(collaborators.name) as?", ["collaborators"])          
+
                 )
                 .leftJoin(
                     "albums",
@@ -86,6 +94,7 @@ router.get(
                 )
                 .where("songs.id", songID)
                 .first()
+                .groupBy("songs.id")
                 .then((result) => {
                     return res.json(result);
                 })
