@@ -3,18 +3,21 @@
         "title": "Layla",
         "length": "07:04",
         "albumId": 1,
-        "artistId": 1
+        "artistId": 1,
+        "rating": 7 
     },
     {
         "title": "War Eternal",
         "length": "03:44",
         "albumId": 2,
-        "artistId": 2
+        "artistId": 2,
+        "rating": 8
     },
     {
         "title": "Sickness Unto You",
         "length": "06:14",
         "albumId": 3,
-        "artistId": 3
+        "artistId": 3,
+        "rating": 10
     }
 ]

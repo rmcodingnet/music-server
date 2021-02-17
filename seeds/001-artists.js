@@ -14,7 +14,8 @@ exports.seed = async function(knex) {
                     firstname: artistData["firstname"],
                     surname: artistData["surname"],
                     age: artistData["age"],
-                    gender: artistData["gender"]
+                    gender: artistData["gender"],
+                    photoUrl: artistData["photoUrl"]
                 }
             });
 

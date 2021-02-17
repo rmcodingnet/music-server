@@ -12,7 +12,9 @@ exports.seed = async function(knex) {
                 return {
                     id: newId,
                     title: albumData["title"],
-                    artistId: albumData["artistId"]
+                    artistId: albumData["artistId"],
+                    releaseDate: albumData["releaseDate"],
+                    photoUrl: albumData["photoUrl"]
                 }
             });
 

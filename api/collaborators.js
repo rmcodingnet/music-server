@@ -21,46 +21,40 @@ router.get(
             return res.status(422).json({ errors: errors.array() });
         }
 
-        return knex("albums")
+        return knex("collaborators")
             .select(
-                "albums.id",
-                "albums.title",
-                "albums.releaseDate",
-                "albums.photoUrl",
-                "artists.firstname",
-                "artists.surname"
+                "collaborators.id",
+                "collaborators.name",
+                "songs.title",
             )
             .leftJoin(
-                "artists",
-                "artists.id",
-                "albums.artistId"
+                "songs",
+                "songs.id",
+                "collaborators.songId"
             )
-            .orderBy("albums.createdAt", "desc")
+            .orderBy("collaborators.createdAt", "desc")
             .then(result => { return res.json(result) })
     }
 )
 
 router.get(
-    "/:albumID",
-    [param("albumID").isInt().toInt()],
+    "/:collabID",
+    [param("collabID").isInt().toInt()],
     async (req, res) => {
         try {
-            const { albumID } = matchedData(req);
-            var albumQuery = knex("albums")
+            const { collabID } = matchedData(req);
+            var albumQuery = knex("collaborators")
                 .select(
-                    "albums.id",
-                    "albums.title",
-                    "albums.releaseDate",
-                    "albums.photoUrl",
-                    "artists.firstname",
-                    "artists.surname"
+                    "collaborators.id",
+                    "collaborators.name",
+                    "songs.title",
                 )
                 .leftJoin(
-                    "artists",
-                    "artists.id",
-                    "albums.artistId"
+                    "songs",
+                    "songs.id",
+                    "collaborators.songId"
                 )
-                .where("albums.id", albumID)
+                .where("collaborators.id", collabID)
                 .first()
                 .then((result) => {
                     return res.json(result);
@@ -79,10 +73,8 @@ router.get(
 router.post(
     "/",
     [
-        body("title"),
-        body("artistId"),
-        body("releaseDate"),
-        body("photoUrl")
+        body("name"),
+        body("songId")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -92,12 +84,10 @@ router.post(
 
         const data = matchedData(req, { includeOptionals: true });
         console.log(req.body, "body")
-        knex("albums")
+        knex("collaborators")
             .insert({
-                title: data.title,
-                artistId: data.artistId,
-                releaseDate: data.releaseDate,
-                photoUrl: data.photoUrl,
+                name: data.name,
+                songId: data.songId,
                 createdAt: new Date(),
                 updatedAt: new Date()
             })
@@ -114,10 +104,8 @@ router.post(
     "/:ID",
     [
         param("ID"),
-        body("title"),
-        body("artistId"),
-        body("releaseDate"),
-        body("photoUrl")
+        body("name"),
+        body("songId")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -127,18 +115,16 @@ router.post(
 
         const data = matchedData(req, { includeOptionals: true });
 
-        knex("albums")
+        knex("collaborators")
             .update({
-                title: data.title,
-                artistId: data.artistId,
-                releaseDate: data.releaseDate,
-                photoUrl: data.photoUrl,
+                name: data.name,
+                songId: data.songId,
                 updatedAt: new Date()
             })
             .where("id", data.ID)
             .then((result) => {
                 if (result > 0) {
-                    return res.send("ALBUM UPDATED");
+                    return res.send("COLLABORATOR UPDATED");
                 }
                 return res.status(404).send("Not found");
             })
@@ -158,16 +144,16 @@ router.delete("/:ID", [param("ID").isInt().toInt()], (req, res) => {
 
     const { ID } = matchedData(req, { includeOptionals: true });
 
-    knex("albums")
+    knex("collaborators")
         .where({
             id: ID,
         })
         .del()
         .then((value) => {
             if (value > 0) {
-                return res.send("ALBUM DELETED");
+                return res.send("COLLABORATOR DELETED");
             }
-            return res.status(404).send("ALBUM NOT FOUND");
+            return res.status(404).send("COLLABORATOR NOT FOUND");
         })
         .catch((error) => {
             return res.status(500).send(error);

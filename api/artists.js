@@ -27,7 +27,8 @@ router.get(
                 "artists.firstname",
                 "artists.surname",
                 "artists.age",
-                "artists.gender"//,
+                "artists.gender",
+                "artists.photoUrl"
                 // "songs.title",
                 // "albums.title"
             )
@@ -58,7 +59,8 @@ router.get(
                     "artists.firstname",
                     "artists.surname",
                     "artists.age",
-                    "artists.gender"//,
+                    "artists.gender",
+                    "artists.photoUrl"
                     // "songs.title",
                     // "albums.title"
                 )
@@ -94,7 +96,8 @@ router.post(
         body("firstname"),
         body("surname"),
         body("age"),
-        body("gender")
+        body("gender"),
+        body("photoUrl")
         // body("songId"),
         // body("albumId")
     ],
@@ -112,6 +115,7 @@ router.post(
                 surname: data.surname,
                 age: data.age,
                 gender: data.gender,
+                photoUrl: data.photoUrl,
                 // songId: data.songId,
                 // albumId: data.albumId,
                 createdAt: new Date(),
@@ -134,6 +138,7 @@ router.post(
         body("surname"),
         body("age"),
         body("gender"),
+        body("photoUrl")
         // body("songId"),
         // body("albumId")
     ],
@@ -151,6 +156,7 @@ router.post(
              surname: data.surname,
              age: data.age,
              gender: data.gender, 
+             photoUrl: data.photoUrl,
             //  songId: data.songId,
             //  albumId: data.albumId,
              updatedAt: new Date()

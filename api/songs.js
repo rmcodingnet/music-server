@@ -26,9 +26,11 @@ router.get(
                 "songs.id",
                 "songs.title",
                 "songs.length",
+                "songs.rating",
                 "albums.title as albumTitle",
                 "artists.firstname",
-                "artists.surname"
+                "artists.surname",
+                "collaborators.name"
             )
             .leftJoin(
                 "albums",
@@ -39,6 +41,11 @@ router.get(
                 "artists",
                 "artists.id",
                 "songs.artistId"
+            )
+            .rightJoin(
+                "collaborators",
+                "songs.id",
+                "collaborators.songId"
             )
             .orderBy("songs.createdAt", "desc")
             .then(result => { return res.json(result) })
@@ -56,9 +63,11 @@ router.get(
                     "songs.id",
                     "songs.title",
                     "songs.length",
+                    "songs.rating",
                     "albums.title as albumTitle",
                     "artists.firstname",
-                    "artists.surname"
+                    "artists.surname",
+                    "collaborators.name"
                 )
                 .leftJoin(
                     "albums",
@@ -69,6 +78,11 @@ router.get(
                     "artists",
                     "artists.id",
                     "songs.artistId"
+                )
+                .rightJoin(
+                    "collaborators",
+                    "songs.id",
+                    "collaborators.songId"
                 )
                 .where("songs.id", songID)
                 .first()
@@ -92,7 +106,8 @@ router.post(
         body("title"),
         body("length"),
         body("albumId"),
-        body("artistId")
+        body("artistId"),
+        body("rating")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -108,6 +123,7 @@ router.post(
                 length: data.length,
                 albumId: data.albumId,
                 artistId: data.artistId,
+                rating: data.rating,
                 createdAt: new Date(),
                 updatedAt: new Date()
             })
@@ -127,7 +143,8 @@ router.post(
         body("title"),
         body("length"),
         body("albumId"),
-        body("artistId")
+        body("artistId"),
+        body("rating")
 
     ],
     async (req, res) => {
@@ -144,6 +161,7 @@ router.post(
                 length: data.length,
                 albumId: data.albumId,
                 artistId: data.artistId,
+                rating: data.rating,
                 updatedAt: new Date()
             })
             .where("id", data.ID)

@@ -1,12 +1,14 @@
 exports.up = function(knex) {
     return knex.schema
     .table("albums", table => {
-        table.string("title", 100)
+        table.string("title", 100);
+        table.date("releaseDate");
+        table.string("photoUrl", 255);
         table.integer("artistId").unsigned();
         table
             .foreign("artistId")
             .references("artists.id")
-            .onDelete("SET NULL")
+            .onDelete("SET NULL");
     })
 };
 
@@ -16,7 +18,9 @@ exports.down = function(knex) {
             table.dropForeign("artistId");
             table.dropColumns([
                 "title",
-                "artistId"
+                "artistId",
+                "releaseDate",
+                "photoUrl"
             ]);
         })
 };

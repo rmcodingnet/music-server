@@ -14,7 +14,8 @@ exports.seed = async function(knex) {
                     title: songData["title"],
                     length: songData["length"],
                     albumId: songData["albumId"],
-                    artistId: songData["artistId"]
+                    artistId: songData["artistId"],
+                    rating: songData["rating"]
                 }
             });
 

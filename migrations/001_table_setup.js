@@ -15,6 +15,11 @@ exports.up = function(knex) {
             table.datetime("createdAt").defaultTo(knex.fn.now());
             table.datetime("updatedAt").defaultTo(knex.fn.now());
         })
+        .createTable("collaborators", table => {
+            table.increments("id");
+            table.datetime("createdAt").defaultTo(knex.fn.now());
+            table.datetime("updatedAt").defaultTo(knex.fn.now());
+        })
 }
 
 exports.down = function(knex) {
@@ -22,4 +27,5 @@ exports.down = function(knex) {
         .dropTable("artists")
         .dropTable("albums")
         .dropTable("songs")
+        .dropTable("collaborators")
 }

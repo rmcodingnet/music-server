@@ -5,16 +5,26 @@ exports.up = function(knex) {
     .table("songs", table => {
         table.string("title", 100)
         table.time("length")
+        table.integer("rating").unsigned();
+
         table.integer("albumId").unsigned();
         table
             .foreign("albumId")
             .references("albums.id")
             .onDelete("SET NULL")
+
         table.integer("artistId").unsigned();
         table
             .foreign("artistId")
             .references("artists.id")
             .onDelete("SET NULL")
+
+        table.integer("collaboratorId").unsigned();
+        table
+            .foreign("collaboratorId")
+            .references("collaborators.id")
+            .onDelete("SET NULL")
+
     })
 };
 
@@ -23,11 +33,13 @@ exports.down = function(knex) {
     .table("songs", table => {
         var foreignKeys = [
             "albumId",
-            "artistId"
+            "artistId",
+            "collaboratorId"
         ];
         var otherFields = [
             "title",
-            "length"
+            "length",
+            "rating"
         ]
 
         foreignKeys.map(key => {

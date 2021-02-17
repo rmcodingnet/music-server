@@ -1,0 +1,23 @@
+[
+    {
+        "name":"Boobby Whitlock",
+        "songId": 1
+    },
+    {
+        "name":"Michael Amott", 
+        "songId": 2
+    },
+    {
+        "name":"Corey Beaulieu",
+        "songId": 3
+    },
+    {
+        "name":"Paolo Gregoletto",
+        "songId": 3
+    },
+    {
+        "name":"Alex Bent",
+        "songId": 3 
+    }
+
+]
