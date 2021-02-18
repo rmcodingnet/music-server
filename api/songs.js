@@ -108,6 +108,125 @@ router.get(
         }
     }
 )
+//artist header info
+router.get(
+    "/artistinfo/:artistID",
+    [param("artistID").isInt().toInt()],
+    async (req, res) => {
+        try {
+            const { artistID } = matchedData(req);
+            var songQuery = knex("songs")
+                .select(
+                    "songs.id",
+                    "artists.photoUrl",
+                    "artists.firstname",
+                    "artists.surname", 
+                    "artists.age",
+                    knex.raw("GROUP_CONCAT(songs.title) as?", ["songs"]),  
+                    knex.raw("GROUP_CONCAT(albums.title) as?", ["albums"])
+                )
+                .leftJoin(
+                    "albums",
+                    "albums.id",
+                    "songs.albumId"
+                )
+                .leftJoin(
+                    "artists",
+                    "artists.id",
+                    "songs.artistId"
+                )
+                .where("songs.artistId", artistID)
+                .groupBy("songs.artistId")
+                .then((result) => {
+                    return res.json(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Error");
+                })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Error")
+        }
+    }
+)
+
+
+
+
+
+//top rated song list
+router.get(
+    "/artist/:artistID",
+    [param("artistID").isInt().toInt()],
+    async (req, res) => {
+        try {
+            const { artistID } = matchedData(req);
+            console.log("artistID =")
+            console.dir(artistID)
+            var songQuery = knex("songs")
+                .select(
+                    "songs.id",
+                    "songs.title",
+                    "songs.length",
+                    "songs.rating"
+
+                )
+                .where("songs.artistId", artistID)
+                .then((result) => {
+                    return res.json(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Error");
+                })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Error")
+        }
+    }
+)
+//discography
+router.get(
+    "/discog/:artistID",
+    [param("artistID").isInt().toInt()],
+    async (req, res) => {
+        try {
+            const { artistID } = matchedData(req);
+            var songQuery = knex("songs")
+                .select(
+                    "songs.id",
+                    "songs.length",
+                    "albums.title as albumTitle",
+                    "albums.photoUrl",
+                    knex.raw("GROUP_CONCAT(songs.title) as?", ["songs"])  
+                )
+                .leftJoin(
+                    "albums",
+                    "albums.id",
+                    "songs.albumId"
+                )
+                .leftJoin(
+                    "artists",
+                    "artists.id",
+                    "songs.artistId"
+                )
+                .where("songs.artistId", artistID)
+                .groupBy("albums.title")
+                .then((result) => {
+                    return res.json(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Error");
+                })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Error")
+        }
+    }
+)
+
 
 router.post(
     "/",
