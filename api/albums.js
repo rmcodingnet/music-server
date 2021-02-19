@@ -82,7 +82,8 @@ router.post(
         body("title"),
         body("artistId"),
         body("releaseDate"),
-        body("photoUrl")
+        body("photoUrl"),
+        body("description")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -98,6 +99,7 @@ router.post(
                 artistId: data.artistId,
                 releaseDate: data.releaseDate,
                 photoUrl: data.photoUrl,
+                description: data.description,
                 createdAt: new Date(),
                 updatedAt: new Date()
             })
@@ -133,6 +135,7 @@ router.post(
                 artistId: data.artistId,
                 releaseDate: data.releaseDate,
                 photoUrl: data.photoUrl,
+                description: data.description,
                 updatedAt: new Date()
             })
             .where("id", data.ID)

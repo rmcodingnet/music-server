@@ -3,18 +3,43 @@
         "title": "Layla and Other Assorted Love Songs",
         "artistId": 1,
         "releaseDate":"1970-11-09",
-        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/LaylaCover.jpg/220px-LaylaCover.jpg"
+        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/LaylaCover.jpg/220px-LaylaCover.jpg",
+        "description": "Contains the song 'Layla' one of Claptons most recognisable songs."
     },
     {
         "title": "War Eternal",
         "artistId": 2,
         "releaseDate":"2014-06-04",
-        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/thumb/f/fe/Arch_Enemy_-_War_Eternal_artwork.jpg/220px-Arch_Enemy_-_War_Eternal_artwork.jpg"
+        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/thumb/f/fe/Arch_Enemy_-_War_Eternal_artwork.jpg/220px-Arch_Enemy_-_War_Eternal_artwork.jpg",
+        "description": "The first of there albums with a new lead singer."
     },
     {
         "title": "What The Dead Men Say",
         "artistId": 3, 
         "releaseDate":"2020-04-24",
-        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/c/c3/What_the_Dead_Men_Say_Album_Cover.jpg"
+        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/c/c3/What_the_Dead_Men_Say_Album_Cover.jpg",
+        "description": "The latest album from Trivium released during the pandemic."
+    },
+    {
+        "title": "Slowhand", 
+        "artistId": 1,
+        "releaseDate":"1977-11-25",
+        "photoUrl":"https://www.hifinews.com/images/styles/600_wide/public/eric%20clapton%20slowhand%2001.jpg",
+        "description": "One of Eric's most commercially and critically successful studio albums."
+    },
+    {
+        "title": "Rush",
+        "artistId": 1,
+        "releaseDate":"1992-01-14",
+        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/2/29/Rush_soundtrack.jpg",
+        "description":"Soundtrack for a movie of the same name"
+    },
+    {
+        "title": "461 Ocean Boulevard", 
+        "artistId": 1,
+        "releaseDate":"1974-07-01",
+        "photoUrl":"https://upload.wikimedia.org/wikipedia/en/9/9f/EricClapton461OceanBoulevar.jpg",
+        "description": "Clapton's second album."
     }
+
 ]

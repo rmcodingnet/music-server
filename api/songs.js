@@ -123,7 +123,7 @@ router.get(
                     "artists.surname", 
                     "artists.age",
                     knex.raw("GROUP_CONCAT(songs.title) as?", ["songs"]),  
-                    knex.raw("GROUP_CONCAT(albums.title) as?", ["albums"])
+                    knex.raw("GROUP_CONCAT(DISTINCT albums.title) as?", ["albums"])
                 )
                 .leftJoin(
                     "albums",
@@ -169,8 +169,14 @@ router.get(
                     "songs.id",
                     "songs.title",
                     "songs.length",
-                    "songs.rating"
+                    "songs.rating",
+                    "albums.photoUrl"
 
+                )
+                .leftJoin(
+                    "albums",
+                    "albums.id",
+                    "songs.albumId"
                 )
                 .where("songs.artistId", artistID)
                 .then((result) => {
@@ -199,7 +205,8 @@ router.get(
                     "songs.length",
                     "albums.title as albumTitle",
                     "albums.photoUrl",
-                    knex.raw("GROUP_CONCAT(songs.title) as?", ["songs"])  
+                    knex.raw("GROUP_CONCAT(songs.title) as?", ["songs"]),  
+                    knex.raw("GROUP_CONCAT(songs.length) as?", ["songLengths"])
                 )
                 .leftJoin(
                     "albums",
@@ -212,7 +219,94 @@ router.get(
                     "songs.artistId"
                 )
                 .where("songs.artistId", artistID)
-                .groupBy("albums.title")
+                .groupBy("songs.albumId")
+                .then((result) => {
+                    return res.json(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Error");
+                })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Error")
+        }
+    }
+)
+
+//album header details
+router.get(
+    "/albums/:albumID",
+    [param("albumID").isInt().toInt()],
+    async (req, res) => {
+        try {
+            const { albumID } = matchedData(req);
+            var songQuery = knex("songs")
+                .select(
+                    "albums.id as albumId",
+                    "songs.length",
+                    "albums.title as albumTitle",
+                    "albums.description",
+                    "albums.photoUrl",
+                    "artists.firstname",
+                    "artists.surname",
+                    "songs.artistId as artistId",
+                    knex.raw("GROUP_CONCAT(songs.length) as?", ["songLengths"]),
+                    knex.raw("GROUP_CONCAT( DISTINCT collaborators.name) as?", ["collaborators"])    
+                )
+                .leftJoin(
+                    "albums",
+                    "albums.id",
+                    "songs.albumId"
+                )
+                .leftJoin(
+                    "artists",
+                    "artists.id",
+                    "songs.artistId"
+                )
+                .rightJoin(
+                    "collaborators",
+                    "songs.id",
+                    "collaborators.songId"
+                )
+                .where("albums.id", albumID)
+                .groupBy("albums.id")
+                .then((result) => {
+                    return res.json(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Error");
+                })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Error")
+        }
+    }
+)
+
+//album songs 
+
+router.get(
+    "/albumsongs/:albumID",
+    [param("albumID").isInt().toInt()],
+    async (req, res) => {
+        try {
+            const { albumID } = matchedData(req);
+            var songQuery = knex("songs")
+                .select(
+                    "songs.trackNo",
+                    "songs.title",
+                    "collaborators.name",
+                    "songs.length",
+                    
+                )
+                .rightJoin(
+                    "collaborators",
+                    "songs.id",
+                    "collaborators.songId"
+                )
+                .where("songs.albumId", albumID)
                 .then((result) => {
                     return res.json(result);
                 })

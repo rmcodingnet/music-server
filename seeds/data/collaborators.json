@@ -18,6 +18,26 @@
     {
         "name":"Alex Bent",
         "songId": 3 
+    },
+    {
+        "name":"George Terry",
+        "songId": 4
+    },
+    {
+        "name":"J.J Cale",
+        "songId": 5
+    },
+    {
+        "name":"Will Jennings",
+        "songId": 6
+    },
+    {
+        "name":"Bob Marley",
+        "songId": 7
+    },
+    {
+        "name": "Bobby Whitlock",
+        "songId": 8
     }
 
 ]

@@ -1,7 +1,7 @@
 [
     {
         "title": "Layla",
-        "length": "07:04",
+        "length": "00:07:04",
         "albumId": 1,
         "artistId": 1,
         "rating": 7, 
@@ -9,7 +9,7 @@
     },
     {
         "title": "War Eternal",
-        "length": "03:44",
+        "length": "00:03:44",
         "albumId": 2,
         "artistId": 2,
         "rating": 8,
@@ -17,10 +17,52 @@
     },
     {
         "title": "Sickness Unto You",
-        "length": "06:14",
+        "length": "00:06:14",
         "albumId": 3,
         "artistId": 3,
         "rating": 10,
         "trackNo": 7
+    },
+    {
+        "title": "Wonderful Tonight",
+        "length": "00:03:41",
+        "albumId": 4,
+        "artistId": 1,
+        "rating": 5,
+        "trackNo": 2
+    },
+    {
+        "title": "Cocaine",
+        "length": "00:03:38",
+        "albumId": 4,
+        "artistId": 1,
+        "rating": 8,
+        "trackNo": 1
+    },
+    {
+        "title": "Tears in Heaven",
+        "length": "00:04:30",
+        "albumId": 5,
+        "artistId": 1,
+        "rating": 9,
+        "trackNo": 10
+    },
+    {
+        "title": "I Shot the Sheriff",
+        "length": "00:04:30",
+        "albumId": 6,
+        "artistId": 1,
+        "rating": 6,
+        "trackNo": 5
+    },
+    {
+        "title": "Bell Bottom Blues",
+        "length": "00:05:02",
+        "albumId": 1,
+        "artistId": 1, 
+        "rating": 8,
+        "trackNo": 2
     }
+
+
 ]
