@@ -11,7 +11,7 @@ const {
 const knex = require("../db/knex")
 
 const router = express.Router();
-
+//artist selectbox options
 router.get(
     "/",
     [],
@@ -26,9 +26,9 @@ router.get(
                 "artists.id",
                 "artists.firstname",
                 "artists.surname",
-                "artists.age",
-                "artists.gender",
-                "artists.photoUrl"
+                // "artists.age",
+                // "artists.gender",
+                // "artists.photoUrl"
                 // "songs.title",
                 // "albums.title"
             )

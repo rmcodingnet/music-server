@@ -12,6 +12,7 @@ const knex = require("../db/knex")
 
 const router = express.Router();
 
+//will use this to get data for selectbox in form
 router.get(
     "/",
     [],
@@ -25,16 +26,16 @@ router.get(
             .select(
                 "albums.id",
                 "albums.title",
-                "albums.releaseDate",
-                "albums.photoUrl",
-                "artists.firstname",
-                "artists.surname"
+                // "albums.releaseDate",
+                // "albums.photoUrl",
+                // "artists.firstname",
+                // "artists.surname"
             )
-            .leftJoin(
-                "artists",
-                "artists.id",
-                "albums.artistId"
-            )
+            // .leftJoin(
+            //     "artists",
+            //     "artists.id",
+            //     "albums.artistId"
+            // )
             .orderBy("albums.createdAt", "desc")
             .then(result => { return res.json(result) })
     }
@@ -75,6 +76,37 @@ router.get(
         }
     }
 )
+
+//getAlbums by artist
+router.get(
+    "/artists/:artistID",
+    [param("artistID").isInt().toInt()],
+    async (req, res) => {
+        try {
+            const { artistID } = matchedData(req);
+            var albumQuery = knex("albums")
+                .select(
+                    "albums.id",
+                    "albums.title",
+                    
+                )
+                .where("albums.artistID", artistID)
+                .then((result) => {
+                    return res.json(result);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    return res.status(500).send("Error");
+                })
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Error")
+        }
+    }
+)
+
+
+
 
 router.post(
     "/",

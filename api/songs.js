@@ -108,6 +108,53 @@ router.get(
         }
     }
 )
+
+//song selectbox options
+router.get(
+    "/get/options",
+    [],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        return knex("songs")
+            .select(
+                "songs.id",
+                "songs.title",
+                // "artists.id as artistId",
+                // "artists.firstname",
+                // "artists.surname",
+                // "artists.age",
+                // "collaborators.name as collaborators",
+                // "albums.id as albumId",
+                // "albums.title as albumTitle",
+                // "albums.releaseDate",
+                // "songs.length",      
+                // knex.raw("GROUP_CONCAT(collaborators.name) as?", ["collaborators"])          
+            )
+            // .leftJoin(
+            //     "albums",
+            //     "albums.id",
+            //     "songs.albumId"
+            // )
+            // .leftJoin(
+            //     "artists",
+            //     "artists.id",
+            //     "songs.artistId"
+            // )
+            // .rightJoin(
+            //     "collaborators",
+            //     "songs.id",
+            //     "collaborators.songId"
+            // )
+            .orderBy("songs.createdAt", "desc")
+            // .groupBy("songs.id")
+            .then(result => { return res.json(result) })
+    }
+)
+
 //artist header info
 router.get(
     "/artistinfo/:artistID",
@@ -329,7 +376,8 @@ router.post(
         body("length"),
         body("albumId"),
         body("artistId"),
-        body("rating")
+        body("rating"),
+        body("trackNo")
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -346,6 +394,7 @@ router.post(
                 albumId: data.albumId,
                 artistId: data.artistId,
                 rating: data.rating,
+                trackNo: data.trackNo,
                 createdAt: new Date(),
                 updatedAt: new Date()
             })
