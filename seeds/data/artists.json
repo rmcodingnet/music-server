@@ -3,6 +3,7 @@
         "firstname": "Eric",
         "surname": "Clapton",
         "age": 75,
+        "birthDate": "1945-03-30",
         "gender":"Male",
         "photoUrl":"https://cdn.britannica.com/31/137031-050-1F67BC5F/Eric-Clapton-2009.jpg"
     },
@@ -10,6 +11,7 @@
         "firstname": "Alissa",
         "surname": "White-Gluz",
         "age": 35,
+        "birthDate": "1985-07-31",
         "gender":"Female",
         "photoUrl":"https://townsquare.media/site/366/files/2016/04/Alissa-White-Gluz.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89"
     },
@@ -17,6 +19,7 @@
         "firstname": "Matt",
         "surname": "Heafy",
         "age": 35,
+        "birthDate": "1986-01-26",
         "gender":"Male",
         "photoUrl":"https://www.nme.com/wp-content/uploads/2018/10/2018_mattheafytrivium_2000x1270.jpg"
     }

@@ -28,7 +28,7 @@ router.get(
                 "artists.id as artistId",
                 "artists.firstname",
                 "artists.surname",
-                "artists.age",
+                "artists.birthDate",
                 "collaborators.name as collaborators",
                 "albums.id as albumId",
                 "albums.title as albumTitle",
@@ -168,7 +168,7 @@ router.get(
                     "artists.photoUrl",
                     "artists.firstname",
                     "artists.surname", 
-                    "artists.age",
+                    "artists.birthDate",
                     knex.raw("GROUP_CONCAT(songs.title) as?", ["songs"]),  
                     knex.raw("GROUP_CONCAT(DISTINCT albums.title) as?", ["albums"])
                 )

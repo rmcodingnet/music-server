@@ -59,6 +59,7 @@ router.get(
                     "artists.firstname",
                     "artists.surname",
                     "artists.age",
+                    "artist.birthDate",
                     "artists.gender",
                     "artists.photoUrl"
                     // "songs.title",
@@ -96,6 +97,7 @@ router.post(
         body("firstname"),
         body("surname"),
         body("age"),
+        body("birthDate"),
         body("gender"),
         body("photoUrl")
         // body("songId"),

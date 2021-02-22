@@ -14,6 +14,7 @@ exports.seed = async function(knex) {
                     firstname: artistData["firstname"],
                     surname: artistData["surname"],
                     age: artistData["age"],
+                    birthDate: artistData["birthDate"],
                     gender: artistData["gender"],
                     photoUrl: artistData["photoUrl"]
                 }
